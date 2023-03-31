@@ -17,6 +17,15 @@ namespace keeper.Services
         return vault;
     }
 
+    internal Vault DeleteVault(int id, Account userInfo)
+    {
+        Vault vault = this.GetVaultById(id, userInfo.Id);
+        if(vault.CreatorId != userInfo.Id) throw new Exception("Not your vault to delete man, how did you even get here? nerd");
+        int rows = _repo.DeleteVault(id);
+        if(rows != 1) throw new Exception($"something went wrong man {rows} vaults were deleted check your db");
+        return vault;
+    }
+
     internal Vault EditVault(int id, Vault updata, Account userInfo)
     {
         Vault original = this.GetVaultById(id, userInfo.Id);

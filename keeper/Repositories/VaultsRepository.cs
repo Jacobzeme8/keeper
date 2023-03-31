@@ -24,6 +24,17 @@ namespace keeper.Repositories
         return vaultData;
     }
 
+    internal int DeleteVault(int id)
+    {
+        string sql = @"
+        DELETE FROM vaults
+        WHERE id = @id;
+        ";
+
+        int rows = _db.Execute(sql, new{id});
+        return rows;
+    }
+
     internal int EditVault(Vault original)
     {
         string sql = @"
@@ -32,7 +43,7 @@ namespace keeper.Repositories
         description = @description,
         name = @name,
         Img = @Img
-        
+
         WHERE id = @id;
         ";
 
