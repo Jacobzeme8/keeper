@@ -64,3 +64,13 @@ JOIN keeps ON vaultkeeps.keepId = keeps.id
 JOIN accounts ON keeps.creatorId = accounts.id
 WHERE vaultkeeps.vaultId = 12
 ;
+
+SELECT
+        keeps.*,
+        creator.*,
+        COUNT(vaultkeeps.id) AS Kept
+        FROM keeps
+        LEFT JOIN vaultkeeps ON vaultkeeps.keepId = keeps.id
+        JOIN accounts creator ON keeps.creatorId = creator.id
+        WHERE keeps.id = 35 
+        GROUP BY (keeps.id);

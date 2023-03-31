@@ -56,5 +56,14 @@ namespace keeper.Services
         if(vault == null) throw new Exception("No vault there man figure it out");
         return vault;
     }
+
+    internal List<Vault> GetVaultsByProfile(string creatorId, Account userInfo)
+    {
+        List<Vault> vaults = _repo.GetVaultsByProfile(creatorId);
+        if(vaults[0] == null) return vaults;
+        if(vaults[0].CreatorId == userInfo.Id) return vaults;
+        List<Vault> filterdVaults = vaults.FindAll( v => v.IsPrivate == false);
+        return filterdVaults;
+    }
     }
 }

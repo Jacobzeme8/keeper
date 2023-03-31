@@ -20,7 +20,7 @@ namespace keeper.Services
     internal string DeleteKeep(int id, Account userInfo)
     {
         Keep keep = this.GetOneKeep(id);
-        if(keep.CreatorId != userInfo.Id) throw new Exception("NOt your keep to edit man");
+        if(keep.Creator.Id != userInfo.Id) throw new Exception("NOt your keep to edit man");
         int rows = _repo.DeleteKeep(id);
         if(rows != 1) throw new Exception($"something when wrong man {rows} were deleted");
         return $"{rows} keeps were deleted";
@@ -41,6 +41,12 @@ namespace keeper.Services
     internal List<Keep> GetAllKeeps()
     {
         List<Keep> keeps = _repo.GetAllKeeps();
+        return keeps;
+    }
+
+    internal List<Keep> GetKeepsByProfile(string CreatorId)
+    {
+        List<Keep> keeps = _repo.GetKeepsByProfile(CreatorId);
         return keeps;
     }
 

@@ -67,6 +67,20 @@ namespace keeper.Repositories
         return keeps;
     }
 
+    internal List<Keep> GetKeepsByProfile(string creatorId)
+    {
+        string sql = @"
+        SELECT
+        *
+        FROM
+        keeps
+        WHERE creatorId = @creatorId;
+        ";
+
+        List<Keep> keeps = _db.Query<Keep>(sql, new{creatorId}).ToList();
+        return keeps;
+    }
+
     internal Keep GetOneKeep(int id)
     {
         string sql = @"
@@ -77,10 +91,13 @@ namespace keeper.Repositories
 
         SELECT
         keeps.*,
-        creator.*
+        creator.*,
+        COUNT(vaultkeeps.id) AS Kept
         FROM keeps
-        JOIN accounts creator ON keeps.creatorId = creatorId
-        WHERE keeps.id = @id;        
+        LEFT JOIN vaultkeeps ON vaultkeeps.keepId = keeps.id
+        JOIN accounts creator ON keeps.creatorId = creator.id
+        WHERE keeps.id = @id
+        GROUP BY (keeps.id);        
         ";
 
         Keep keep = _db.Query<Keep, Account, Keep>(sql, (keep, creator) =>{
