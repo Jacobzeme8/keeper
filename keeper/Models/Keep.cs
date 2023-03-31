@@ -11,4 +11,8 @@ namespace keeper.Models
         public int Kept { get; set; }
         public Account Creator { get; set; }
     }
+
+    public class KeepInVault : Keep {
+      public int vaultKeepId { get; set; }
+    }
 }

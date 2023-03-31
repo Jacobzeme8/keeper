@@ -3,10 +3,12 @@ namespace keeper.Services
     public class VaultsService
     {
         private readonly VaultsRepository _repo;
+        private readonly VaultKeepsService _vaultKeepsService;
 
-    public VaultsService(VaultsRepository repo)
+    public VaultsService(VaultsRepository repo, VaultKeepsService vaultKeepsService)
     {
-        _repo = repo;
+      _repo = repo;
+      _vaultKeepsService = vaultKeepsService;
     }
 
     internal Vault CreateVault(Account userInfo, Vault vaultData)
@@ -37,6 +39,14 @@ namespace keeper.Services
         int rows = _repo.EditVault(original);
         if(rows != 1) throw new Exception($"somethings wacky man {rows} vaults were eddited check your db");
         return original;
+    }
+
+    internal List<KeepInVault> GetKeepsInVault(int id, string userId)
+    {
+        Vault vault = this.GetVaultById(id, userId);
+        List<KeepInVault> keeps = _vaultKeepsService.GetKeepsInVault(vault.Id);
+        return keeps;
+
     }
 
     internal Vault GetVaultById(int id, string accountId)
