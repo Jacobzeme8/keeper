@@ -24,6 +24,22 @@ namespace keeper.Repositories
         return vaultData;
     }
 
+    internal int EditVault(Vault original)
+    {
+        string sql = @"
+        UPDATE vaults
+        SET
+        description = @description,
+        name = @name,
+        Img = @Img
+        
+        WHERE id = @id;
+        ";
+
+        int rows = _db.Execute(sql, original);
+        return rows;
+    }
+
     internal Vault GetVaultById(int id)
     {
         string sql = @"

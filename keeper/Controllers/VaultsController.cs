@@ -44,6 +44,21 @@ namespace keeper.Controllers
         }
     }
 
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<ActionResult<Vault>> EditVault(int id, [FromBody] Vault updata){
+        try 
+        {
+            Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+            Vault vault = _vaultsService.EditVault(id, updata, userInfo);
+            return vault;
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
 
 
   }

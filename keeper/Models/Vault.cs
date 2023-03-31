@@ -8,7 +8,7 @@ namespace keeper.Models
 
         public string description { get; set; }
         public string Img { get; set; }
-        public bool IsPrivate { get; set; }
+        public bool ?IsPrivate { get; set; }
         public Account Creator { get; set; }
     }
 }
