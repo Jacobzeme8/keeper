@@ -3,15 +3,19 @@ namespace keeper.Services
   public class VaultKeepsService
     {
         private readonly VaultKeepsRepository _repo;
+        private readonly VaultsService _vaultsService;
 
-    public VaultKeepsService(VaultKeepsRepository repo)
+    public VaultKeepsService(VaultKeepsRepository repo, VaultsService vaultsService)
     {
-        _repo = repo;
+      _repo = repo;
+      _vaultsService = vaultsService;
     }
 
     internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData, Account userInfo)
     {
         vaultKeepData.creatorId = userInfo.Id;
+        Vault vault = _vaultsService.GetVaultById(vaultKeepData.vaultId, vaultKeepData.creatorId);
+        if(vault.CreatorId != userInfo.Id) throw new Exception("Not your vault to edit");
         VaultKeep vaultKeep = _repo.CreateVaultKeep(vaultKeepData);
         return vaultKeep;
     }
@@ -26,11 +30,6 @@ namespace keeper.Services
         return vaultKeep;
     }
 
-    internal List<KeepInVault> GetKeepsInVault(int vaultId)
-    {
-        List<KeepInVault> keeps = _repo.GetKeepsInVault(vaultId);
-        return keeps;
-    }
 
     }
 }

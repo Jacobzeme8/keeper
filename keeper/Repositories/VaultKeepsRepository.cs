@@ -48,28 +48,6 @@ namespace keeper.Repositories
         return vaultKeep;
     }
 
-    internal List<KeepInVault> GetKeepsInVault(int vaultId)
-    {
-        string sql = @"
-        SELECT
-        vaultkeeps.*,
-        keeps.*,
-        accounts.*
-        FROM
-        vaultkeeps
-        JOIN keeps ON vaultkeeps.keepId = keeps.id
-        JOIN accounts ON keeps.creatorId = accounts.id
-        WHERE vaultkeeps.vaultId = @vaultId;
-        ";
-
-        List<KeepInVault> keeps = _db.Query<VaultKeep, KeepInVault, Account, KeepInVault>(sql, (vaultKeep, keepInVault, account) => {
-            keepInVault.vaultKeepId = vaultKeep.Id;
-            keepInVault.Creator = account;
-            return keepInVault;
-        }, new{vaultId}).ToList();
-        return keeps;
-
-
-    }
+    
     }
 }

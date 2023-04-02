@@ -51,6 +51,21 @@ namespace keeper.Repositories
         return rows;
     }
 
+    internal List<Vault> GetAccountVaults(string id)
+    {
+        string sql = @"
+        SELECT
+        *
+        FROM vaults
+        WHERE
+        vaults.creatorId = @id;
+        ";
+
+        List<Vault> vaults = _db.Query<Vault>(sql, new{id}).ToList();
+        return vaults;
+
+    }
+
     internal Vault GetVaultById(int id)
     {
         string sql = @"

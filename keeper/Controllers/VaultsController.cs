@@ -76,9 +76,16 @@ namespace keeper.Controllers
 
     [HttpGet("{id}/keeps")]
     public async Task<ActionResult<List<KeepInVault>>> GetKeepsInVault(int id){
+        try 
+        {
         Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
         List<KeepInVault> keeps = _vaultsService.GetKeepsInVault(id, userInfo?.Id);
         return keeps;
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
 

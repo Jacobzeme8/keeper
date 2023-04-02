@@ -3,12 +3,12 @@ namespace keeper.Services
     public class VaultsService
     {
         private readonly VaultsRepository _repo;
-        private readonly VaultKeepsService _vaultKeepsService;
+        private readonly KeepsService _KeepsService;
 
-    public VaultsService(VaultsRepository repo, VaultKeepsService vaultKeepsService)
+    public VaultsService(VaultsRepository repo, KeepsService keepsService)
     {
       _repo = repo;
-      _vaultKeepsService = vaultKeepsService;
+      _KeepsService = keepsService;
     }
 
     internal Vault CreateVault(Account userInfo, Vault vaultData)
@@ -41,10 +41,16 @@ namespace keeper.Services
         return original;
     }
 
+    internal List<Vault> GetAccountVaults(Account userInfo)
+    {
+        List<Vault> vaults = _repo.GetAccountVaults(userInfo.Id);
+        return vaults;
+    }
+
     internal List<KeepInVault> GetKeepsInVault(int id, string userId)
     {
         Vault vault = this.GetVaultById(id, userId);
-        List<KeepInVault> keeps = _vaultKeepsService.GetKeepsInVault(vault.Id);
+        List<KeepInVault> keeps = _KeepsService.GetKeepsInVault(vault.Id);
         return keeps;
 
     }
@@ -60,8 +66,8 @@ namespace keeper.Services
     internal List<Vault> GetVaultsByProfile(string creatorId, Account userInfo)
     {
         List<Vault> vaults = _repo.GetVaultsByProfile(creatorId);
-        if(vaults[0] == null) return vaults;
-        if(vaults[0].CreatorId == userInfo.Id) return vaults;
+        // if(vaults[0] == null) return vaults;
+        // if(vaults[0].CreatorId == userInfo.Id) return vaults;
         List<Vault> filterdVaults = vaults.FindAll( v => v.IsPrivate == false);
         return filterdVaults;
     }

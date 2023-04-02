@@ -50,6 +50,12 @@ namespace keeper.Services
         return keeps;
     }
 
+    internal List<KeepInVault> GetKeepsInVault(int vaultId)
+    {
+        List<KeepInVault> keeps = _repo.GetKeepsInVault(vaultId);
+        return keeps;
+    }
+
     internal Keep GetOneKeep(int id)
     {
         Keep keep = _repo.GetOneKeep(id);
