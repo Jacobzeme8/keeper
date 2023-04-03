@@ -11,10 +11,18 @@
           <p class="text-wrap">{{ keep.description }}</p>
           <div class="d-flex flex-row align-items-center pb-3">
             <p>{{ keep.creator.name }}</p>
-            <router-link :to="{ name: 'Profile', params: { profileId: keep.creator.id } }">
-              <img data-bs-toggle="modal" class="img-fluid picture rounded-circle ms-4" :src="keep.creator.picture"
-                alt="">
-            </router-link>
+            <div v-if="account.id != keep.creator.id">
+              <router-link :to="{ name: 'Profile', params: { profileId: keep.creator.id } }">
+                <img data-bs-toggle="modal" class="img-fluid picture rounded-circle ms-4" :src="keep.creator.picture"
+                  alt="">
+              </router-link>
+            </div>
+            <div v-if="account.id == keep.creator.id">
+              <router-link :to="{ name: 'Account' }">
+                <img data-bs-toggle="modal" class="img-fluid picture rounded-circle ms-4" :src="keep.creator.picture"
+                  alt="">
+              </router-link>
+            </div>
           </div>
           <div class="d-flex">
             <form @submit.prevent="addKeepToVault(keep.id)" class="d-flex flex-row pb-3">

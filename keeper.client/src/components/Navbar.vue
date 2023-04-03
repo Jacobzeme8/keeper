@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
@@ -24,10 +24,43 @@
           </router-link>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
       <Login />
     </div>
-  </nav>
+  </nav> -->
+
+
+  <div class="container-fluid bg-dark">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+            <div class="d-flex flex-column align-items-center">
+              <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+            </div>
+          </router-link>
+          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
+            About
+          </router-link>
+        </div>
+        <div class="d-flex align-items-center">
+          <div>
+            <button data-bs-toggle="modal" data-bs-target="#vault-form" class="btn btn-success me-3">Create Vault</button>
+            <button data-bs-toggle="modal" data-bs-target="#keep-form" class="btn btn-success me-3">Create Keep</button>
+          </div>
+          <Login />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ModalComponent id="vault-form">
+    <VaultForm />
+  </ModalComponent>
+
+  <ModalComponent id="keep-form">
+    <KeepForm />
+  </ModalComponent>
 </template>
 
 <script>
@@ -60,5 +93,4 @@ a:hover {
     height: 64px;
   }
 }
-
 </style>
