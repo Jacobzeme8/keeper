@@ -8,7 +8,7 @@ namespace keeper.Models
         public string Description { get; set; }
         public string Img { get; set; }
         public int Views { get; set; }
-        public int kept { get; set; }
+        public int Kept { get; set; }
         public Account Creator { get; set; }
     }
 

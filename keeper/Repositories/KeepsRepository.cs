@@ -91,8 +91,8 @@ namespace keeper.Repositories
 
         SELECT
         keeps.*,
-        creator.*,
-        COUNT(vaultkeeps.id) AS kept
+        COUNT(vaultkeeps.id) AS kept,
+        creator.*
         FROM keeps
         LEFT JOIN vaultkeeps ON vaultkeeps.keepId = keeps.id
         JOIN accounts creator ON keeps.creatorId = creator.id
