@@ -1,22 +1,43 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img
-        src="https://bcw.blob.core.windows.net/public/img/8600856373152463"
-        alt="CodeWorks Logo"
-        class="rounded-circle"
-      >
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="container-fluid">
+    <div class="py-5">
+      <section class="bricks">
+        <div v-for="keep in keeps">
+          <KeepsCard :keep="keep" />
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script>
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { keepsService } from "../services/KeepsService"
+import { computed, onMounted } from "vue";
+import { AppState } from "../AppState";
+
 export default {
   setup() {
-    return {}
+
+    async function getAllKeeps() {
+      try {
+        await keepsService.getAllKeeps()
+      } catch (error) {
+        logger.error(error)
+        Pop.error(error)
+      }
+    }
+
+    onMounted(() => {
+      getAllKeeps()
+    })
+
+
+    return {
+      keeps: computed(() => AppState.keeps)
+
+    }
   }
 }
 </script>
@@ -39,6 +60,22 @@ export default {
       object-fit: contain;
       object-position: center;
     }
+  }
+}
+
+$gap: .5em;
+
+.bricks {
+  columns: 300px;
+  column-gap: $gap;
+
+  // overflow: hidden;
+
+
+  &>div {
+    margin-top: $gap;
+    display: inline-block;
+    white-space: nowrap;
   }
 }
 </style>
