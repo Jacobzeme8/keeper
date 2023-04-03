@@ -15,6 +15,11 @@ class KeepsService{
     AppState.activeKeep = res.data
   }
 
+  async getMyKeeps(){
+    const res = await api.get(`api/profiles/${AppState.account.id}/keeps`)
+    AppState.keeps = res.data
+  }
+
 }
 
 export const keepsService = new KeepsService();

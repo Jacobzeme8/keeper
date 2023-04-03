@@ -1,9 +1,13 @@
+import { AppState } from "../AppState";
+import { logger } from "../utils/Logger";
 import { api } from "./AxiosService";
 
 class VaultsService{
 
   async getMyVaults(){
-    await api.get('/account/vaults')
+    const res = await api.get('account/vaults')
+    logger.log(res.data)
+    AppState.vaults = res.data
   }
 
 }

@@ -14,17 +14,30 @@
       <div class="col-12">
         <h1>My Vaults</h1>
       </div>
-
+      <div v-for="vault in vaults" class="col-3 my-2">
+        <VaultComponent :vault="vault" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h1>My Keeps</h1>
+      </div>
+      <section class="bricks">
+        <div v-for="keep in keeps">
+          <KeepsCard :keep="keep" />
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { vaultsService } from "../services/VaultsService"
+import { keepsService } from "../services/KeepsService"
 export default {
   setup() {
 
@@ -37,14 +50,30 @@ export default {
       }
     }
 
+    async function getMyKeeps() {
+      try {
+        await keepsService.getMyKeeps()
+      } catch (error) {
+        logger.error(error)
+        Pop.error(error)
+      }
+    }
+
+    onMounted(() => {
+      getMyVaults()
+      getMyKeeps()
+    })
+
     return {
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      vaults: computed(() => AppState.vaults),
+      keeps: computed(() => AppState.keeps)
     }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .cover-img {
   height: 40vh;
   width: 100%;
@@ -56,5 +85,21 @@ export default {
   height: 10vh;
   widows: 10vh;
   transform: translateY(-5vh);
+}
+
+$gap: .5em;
+
+.bricks {
+  columns: 300px;
+  column-gap: $gap;
+
+  // overflow: hidden;
+
+
+  &>div {
+    margin-top: $gap;
+    display: inline-block;
+    white-space: nowrap;
+  }
 }
 </style>
