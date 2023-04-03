@@ -3,6 +3,7 @@
     <div class="keep-view">
       <img @click="getActiveKeep(keep.id)" data-bs-toggle="modal" data-bs-target="#keepModal"
         class="rounded img-fluid selectable" :src="keep.img" alt="">
+      <slot class="top-card"></slot>
       <div class="profile-info ps-2">
         <h3 class="text-wrap text-light shadow">{{ keep.name }}</h3>
       </div>
@@ -62,5 +63,10 @@ export default {
 
 .shadow {
   text-shadow: 2px 2px 4px black;
+}
+
+.top-card {
+  position: absolute;
+  top: 2px;
 }
 </style>

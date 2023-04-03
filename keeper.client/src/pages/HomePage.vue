@@ -14,8 +14,9 @@
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { keepsService } from "../services/KeepsService"
-import { computed, onMounted } from "vue";
+import { computed, onMounted, watchEffect } from "vue";
 import { AppState } from "../AppState";
+import { vaultsService } from "../services/VaultsService";
 
 export default {
   setup() {
@@ -29,13 +30,28 @@ export default {
       }
     }
 
+    async function getMyVaults() {
+      try {
+        await vaultsService.getMyVaults()
+      } catch (error) {
+        logger.error(error)
+        Pop.error(error)
+      }
+    }
+
     onMounted(() => {
       getAllKeeps()
     })
 
+    watchEffect(() => {
+      if (AppState.account.id) {
+        getMyVaults()
+      }
+    })
+
 
     return {
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
 
     }
   }
