@@ -20,6 +20,12 @@ class KeepsService{
     AppState.keeps = res.data
   }
 
+  async getKeepsInVault(vaultId){
+    const res = await api.get(`api/vaults/${vaultId}/keeps`)
+    logger.log(res.data)
+    AppState.keeps = res.data
+  }
+
 }
 
 export const keepsService = new KeepsService();

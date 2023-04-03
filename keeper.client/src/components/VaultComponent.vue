@@ -2,7 +2,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 p-0 vault-view">
-        <img :src="vault.img" class="img-fluid rounded" alt="">
+        <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
+          <img :src="vault.img" class="img-fluid rounded" alt="">
+        </router-link>
         <h3 class=" ps-2 shadow text-light vault-name">{{ vault.name }}</h3>
       </div>
     </div>
