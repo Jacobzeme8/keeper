@@ -41,9 +41,10 @@
         </div>
         <div class="d-flex align-items-center">
           <div>
-            <button data-bs-toggle="modal" data-bs-target="#vault-form" class="btn btn-success me-3">Create
+            <button data-bs-toggle="modal" data-bs-target="#vault-form" class="btn btn-success form-button me-3">Create
               Vault</button>
-            <button data-bs-toggle="modal" data-bs-target="#keep-form" class="btn btn-success me-3">Create Keep</button>
+            <button data-bs-toggle="modal" data-bs-target="#keep-form" class="btn btn-success form-button me-3">Create
+              Keep</button>
           </div>
           <Login />
         </div>
@@ -93,6 +94,13 @@ a:hover {
 @media screen and (min-width: 768px) {
   nav {
     height: 64px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-button {
+    margin-bottom: .5em;
+    margin-top: .5em;
   }
 }
 </style>

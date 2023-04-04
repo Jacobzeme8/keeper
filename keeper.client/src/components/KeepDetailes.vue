@@ -1,8 +1,8 @@
 <template>
-  <div v-if="keep" class="component">
+  <div v-if="keep" class="component ">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 p-0">
+        <div class="col-md-6 p-0  background-mock">
           <img class="img-fluid keep-img rounded" :src="keep.img" alt="">
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-around align-items-center">
@@ -42,7 +42,7 @@
 
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, onUnmounted } from "vue";
 import { AppState } from "../AppState";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
@@ -51,6 +51,10 @@ export default {
   setup() {
 
     const editable = ref({})
+
+    onUnmounted(() => {
+      AppState.activeKeep = null
+    })
 
     return {
       keep: computed(() => AppState.activeKeep),
@@ -77,6 +81,11 @@ export default {
 
 
 <style lang="scss" scoped>
+.backround-mock {
+  background-color: #FEF6F0;
+  ;
+}
+
 .picture {
   width: 45px;
   height: 45px;
