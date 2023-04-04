@@ -2,13 +2,15 @@
   <div class="m-2 rounded">
     <div class="keep-view">
       <img @click="getActiveKeep(keep.id)" data-bs-toggle="modal" data-bs-target="#keepModal"
-        class="rounded img-fluid selectable" :src="keep.img" alt="">
+        class="rounded img-fluid selectable d-flex" :src="keep.img" alt="">
       <slot class="top-card"></slot>
       <i :title="`Delete ${keep.name} Keep`" @click="deleteKeep(keep.id)"
         v-if="keep.creatorId == account.id && route.path == '/account'"
         class="mdi mdi-delete fs-4 text-danger delete selectable"></i>
-      <div class="profile-info ps-2">
+      <div v-if="keep" class="profile-info ps-2 d-flex ">
         <h3 class="text-wrap text-light shadow">{{ keep.name }}</h3>
+        <img v-if="!route.path.includes('profile')" class="rounded-circle profile-picture ms-3 me-1 mb-1"
+          :src="keep.creator.picture" alt="">
       </div>
     </div>
   </div>
@@ -71,6 +73,11 @@ export default {
 
 
 <style lang="scss" scoped>
+.profile-picture {
+  width: 45px;
+  height: 45px;
+}
+
 .delete {
   position: absolute;
   top: 5px;

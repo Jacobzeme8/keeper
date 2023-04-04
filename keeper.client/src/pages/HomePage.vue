@@ -82,7 +82,7 @@ export default {
 $gap: .5em;
 
 .bricks {
-  columns: 300px;
+  columns: 250px;
   column-gap: $gap;
 
   // overflow: hidden;
@@ -92,6 +92,12 @@ $gap: .5em;
     margin-top: $gap;
     display: inline-block;
     white-space: nowrap;
+  }
+}
+
+@media (max-width: 576px) {
+  .bricks {
+    columns: 150px;
   }
 }
 </style>
