@@ -34,8 +34,14 @@ class KeepsService{
 
   async createKeep(keepData, route){
     const res = await api.post('api/keeps', keepData)
-    logger.log(res.data)
+    
     if(!route.path.includes('profile')){
+      AppState.keeps.push(res.data)
+    }
+    if(route.path == '/account'){
+      logger.log(route.path)
+      res.data.creator = null
+      logger.log(res.data)
       AppState.keeps.push(res.data)
     }
   }

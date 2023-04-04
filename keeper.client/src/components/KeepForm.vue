@@ -29,7 +29,7 @@ export default {
         try {
           const keepData = editable.value
           await keepsService.createKeep(keepData, route)
-          editable = {}
+          editable.value = {}
         } catch (error) {
           Pop.error(error)
           logger.error(error)
