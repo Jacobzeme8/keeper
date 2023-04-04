@@ -6,7 +6,7 @@
     <input minlength="3" maxlength="500" v-model="editable.description" class="form-control" type="text">
     <label for="">Image URL</label>
     <input minlength="3" maxlength="150" v-model="editable.img" class="form-control" type="text">
-    <button class="btn btn-success" data-bs-dismiss="modal">Create Keep</button>
+    <button class="btn btn-success mt-3" data-bs-dismiss="modal">Create Keep</button>
   </form>
 </template>
 
