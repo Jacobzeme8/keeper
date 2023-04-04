@@ -14,8 +14,9 @@
       <section class="bricks">
         <div v-for="keep in keeps">
           <KeepsCard :keep="keep">
-            <button @click="deleteVaultKeep(keep.vaultKeepId)" v-if="account.id == vault.creatorId"
-              class="delete-button btn btn-danger m-0 p-1"><i class="mdi mdi-delete fs-5"></i></button>
+            <button :title="`Remove ${keep.name} from ${vault.name}`" @click="deleteVaultKeep(keep.vaultKeepId)"
+              v-if="account.id == vault.creatorId" class="delete-button btn btn-danger m-0 p-1"><i
+                class="mdi mdi-delete fs-5"></i></button>
           </KeepsCard>
         </div>
       </section>

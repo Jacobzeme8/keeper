@@ -8,7 +8,7 @@
         v-if="keep.creatorId == account.id && route.path == '/account'"
         class="mdi mdi-delete fs-4 text-danger delete selectable"></i>
       <div v-if="keep.creator" class="profile-info ps-2 d-flex ">
-        <h4 class="text-wrap text-light shadow">{{ keep.name }}</h4>
+        <h3 class="text-wrap text-light shadow">{{ keep.name }}</h3>
         <img :title="keep.creator.name" v-if="!route.path.includes('profile', 'account')"
           class="rounded-circle profile-picture ms-3 me-1 mb-1" :src="keep.creator.picture" alt="">
       </div>
