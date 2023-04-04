@@ -1,11 +1,11 @@
 <template>
   <form @submit.prevent="createKeep()" class="p-4">
     <label for="">Name</label>
-    <input v-model="editable.name" class="form-control" type="text">
+    <input minlength="3" maxlength="20" v-model="editable.name" class="form-control" type="text">
     <label for="">Description</label>
-    <input v-model="editable.description" class="form-control" type="text">
+    <input minlength="3" maxlength="500" v-model="editable.description" class="form-control" type="text">
     <label for="">Image URL</label>
-    <input v-model="editable.img" class="form-control" type="text">
+    <input minlength="3" maxlength="150" v-model="editable.img" class="form-control" type="text">
     <button class="btn btn-success" data-bs-dismiss="modal">Create Keep</button>
   </form>
 </template>

@@ -2,10 +2,11 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 p-0 vault-view">
-        <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
-          <img :title="`Go to ${vault.name} vault page`" :src="vault.img" class="img-fluid rounded vault-img" alt="">
+        <router-link name="Vault Page" :to="{ name: 'Vault', params: { vaultId: vault.id } }">
+          <img :title="`Go to ${vault.name} vault page`" :src="vault.img" class="img-fluid rounded vault-img"
+            :alt="vault.name">
         </router-link>
-        <h3 class=" ps-2 shadow text-light vault-name">{{ vault.name }}</h3>
+        <p class=" ps-2 shadow text-light vault-name fs-3">{{ vault.name }}</p>
         <i title="Private Vault" v-if="vault.isPrivate" class="mdi mdi-lock fs-4 private text-light shadow"></i>
         <i :title="`Delete  ${vault.name} Vault`" @click="deleteVault(vault.id)" v-if="vault.creatorId == account.id"
           class="mdi mdi-delete fs-4 text-danger delete selectable"></i>

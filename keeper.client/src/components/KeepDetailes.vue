@@ -19,7 +19,7 @@
             </div>
             <div v-if="account.id == keep.creator.id">
               <router-link :to="{ name: 'Account' }">
-                <img data-bs-toggle="modal" class="img-fluid picture rounded-circle ms-4" :src="keep.creator.picture"
+                <img data-bs-dismiss="modal" class="img-fluid picture rounded-circle ms-4" :src="keep.creator.picture"
                   alt="">
               </router-link>
             </div>

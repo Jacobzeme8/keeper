@@ -1,11 +1,11 @@
 <template>
   <form @submit.prevent="editAccount()" class="p-4">
     <label for="">Name</label>
-    <input class="form-control" v-model="editable.name" type="text">
+    <input minlength="3" maxlength="100" class="form-control" v-model="editable.name" type="text">
     <label for="">Picture</label>
-    <input class="form-control" v-model="editable.picture" type="text">
+    <input minlength="3" maxlength="150" class="form-control" v-model="editable.picture" type="text">
     <label for="">Cover Image</label>
-    <input class="form-control" v-model="editable.coverImg" type="text">
+    <input minlength="3" maxlength="150" class="form-control" v-model="editable.coverImg" type="text">
     <button data-bs-toggle="modal" class="btn btn-success mt-3">Save Account Info</button>
   </form>
 </template>
