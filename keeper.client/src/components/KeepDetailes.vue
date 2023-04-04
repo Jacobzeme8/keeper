@@ -13,14 +13,14 @@
             <p>{{ keep.creator.name }}</p>
             <div v-if="account.id != keep.creator.id">
               <router-link :to="{ name: 'Profile', params: { profileId: keep.creator.id } }">
-                <img data-bs-toggle="modal" class="img-fluid picture rounded-circle ms-4" :src="keep.creator.picture"
-                  alt="">
+                <img title="My account page" data-bs-dismiss="modal" class="img-fluid picture rounded-circle ms-4"
+                  :src="keep.creator.picture" alt="">
               </router-link>
             </div>
             <div v-if="account.id == keep.creator.id">
               <router-link :to="{ name: 'Account' }">
-                <img data-bs-dismiss="modal" class="img-fluid picture rounded-circle ms-4" :src="keep.creator.picture"
-                  alt="">
+                <img data-bs-dismiss="modal" :title="`${keep.creator.name}'s' profile page`"
+                  class="img-fluid picture rounded-circle ms-4" :src="keep.creator.picture" alt="">
               </router-link>
             </div>
           </div>

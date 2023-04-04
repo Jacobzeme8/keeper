@@ -93,8 +93,8 @@ export default {
 }
 
 .picture {
-  height: 10vh;
-  widows: 10vh;
+  height: 80px;
+  width: 80px;
   transform: translateY(-5vh);
 }
 
