@@ -7,6 +7,7 @@
           <img data-bs-target="#account-form" data-bs-toggle="modal" :src="account.picture"
             class="picture img-fluid rounded-circle selectable" alt="">
         </div>
+        <h2>{{ keeps.length }} Keeps / {{ vaults.length }} Vaults</h2>
       </div>
     </div>
   </div>

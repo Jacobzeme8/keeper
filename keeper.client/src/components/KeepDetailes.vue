@@ -24,7 +24,7 @@
               </router-link>
             </div>
           </div>
-          <div class="d-flex">
+          <div v-if="account.id" class="d-flex">
             <form @submit.prevent="addKeepToVault(keep.id)" class="d-flex flex-row pb-3">
               <select v-model="editable.vaultId" class="form-select" aria-label="Default select example">
                 <option :value="vault.id" v-for="vault in vaults">{{ vault.name }}</option>

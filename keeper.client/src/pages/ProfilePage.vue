@@ -6,6 +6,7 @@
         <div>
           <img :src="profile.picture" class="picture img-fluid rounded-circle" alt="">
         </div>
+        <h2>{{ keeps.length }} Keeps / {{ vaults.length }} Vaults</h2>
       </div>
     </div>
   </div>

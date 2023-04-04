@@ -7,10 +7,10 @@
       <i :title="`Delete ${keep.name} Keep`" @click="deleteKeep(keep.id)"
         v-if="keep.creatorId == account.id && route.path == '/account'"
         class="mdi mdi-delete fs-4 text-danger delete selectable"></i>
-      <div v-if="keep" class="profile-info ps-2 d-flex ">
+      <div v-if="keep.creator" class="profile-info ps-2 d-flex ">
         <h3 class="text-wrap text-light shadow">{{ keep.name }}</h3>
-        <img v-if="!route.path.includes('profile')" class="rounded-circle profile-picture ms-3 me-1 mb-1"
-          :src="keep.creator.picture" alt="">
+        <img :title="keep.creator.name" v-if="!route.path.includes('profile', 'account')"
+          class="rounded-circle profile-picture ms-3 me-1 mb-1" :src="keep.creator.picture" alt="">
       </div>
     </div>
   </div>

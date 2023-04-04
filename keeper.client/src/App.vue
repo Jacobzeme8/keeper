@@ -1,12 +1,12 @@
 <template>
-  <header>
+  <header class="backround-mock">
     <Navbar />
   </header>
-  <main>
+  <main class="backround-mock">
     <router-view />
   </main>
-   <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
+  <footer class="backround-mock">
+    <b>Made with C#, JS, and Vue </b>
   </footer>
 </template>
 
@@ -27,10 +27,13 @@ export default {
 <style lang="scss">
 @import "./assets/scss/main.scss";
 
-:root{
+:root {
   --main-height: calc(100vh - 32px - 64px);
 }
 
+.backround-mock {
+  background-color: #FEF6F0;
+}
 
 footer {
   display: grid;
