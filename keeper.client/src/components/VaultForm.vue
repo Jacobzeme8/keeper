@@ -14,7 +14,7 @@
             id="exampleInputPassword1">
           <label class="form-label me-2">Private</label>
           <input v-model="editable.isPrivate" type="checkbox" name="isPrivate" id="">
-          <button data-bs-dismiss="modal" class="btn btn-success m-2">Create Vault</button>
+          <button type="submit" data-bs-dismiss="modal" class="btn btn-success m-2">Create Vault</button>
         </form>
       </div>
     </div>

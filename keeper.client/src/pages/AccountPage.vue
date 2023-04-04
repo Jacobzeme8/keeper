@@ -96,6 +96,7 @@ export default {
   height: 80px;
   width: 80px;
   transform: translateY(-5vh);
+  object-fit: cover;
 }
 
 $gap: .5em;

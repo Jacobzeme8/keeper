@@ -52,5 +52,6 @@ export default {
 .profile {
   height: 45px;
   width: 45px;
+  object-fit: cover;
 }
 </style>
