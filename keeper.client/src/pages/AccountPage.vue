@@ -7,7 +7,7 @@
           <img data-bs-target="#account-form" data-bs-toggle="modal" :src="account.picture"
             class="picture img-fluid rounded-circle selectable" alt="">
         </div>
-        <h2>{{ keeps.length }} Keeps / {{ vaults.length }} Vaults</h2>
+        <h2 v-if="keeps && vaults">{{ keeps.length }} Keeps / {{ vaults.length }} Vaults</h2>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { AppState } from '../AppState'
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
@@ -69,6 +69,11 @@ export default {
     onMounted(() => {
       getMyInfo();
     });
+    onUnmounted(() => {
+      AppState.keeps = null,
+        AppState.vaults = null
+    })
+
     return {
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),

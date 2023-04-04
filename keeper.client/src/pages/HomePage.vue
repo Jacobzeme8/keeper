@@ -14,7 +14,7 @@
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { keepsService } from "../services/KeepsService"
-import { computed, onMounted, watchEffect } from "vue";
+import { computed, onMounted, watchEffect, onUnmounted } from "vue";
 import { AppState } from "../AppState";
 import { vaultsService } from "../services/VaultsService";
 
@@ -47,6 +47,11 @@ export default {
       if (AppState.account.id) {
         getMyVaults()
       }
+    })
+
+    onUnmounted(() => {
+      AppState.keeps = null,
+        AppState.vaults = null
     })
 
 

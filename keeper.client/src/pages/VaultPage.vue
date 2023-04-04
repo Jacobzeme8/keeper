@@ -30,7 +30,7 @@ import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { vaultsService } from "../services/VaultsService";
 import { keepsService } from "../services/KeepsService";
-import { onMounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState";
 import { vaultKeepsService } from "../services/VaultKeepsService"
@@ -62,6 +62,11 @@ export default {
     onMounted(() => {
       getKeepsInVault()
       getVaultById()
+    })
+
+    onUnmounted(() => {
+      AppState.keeps = null,
+        AppState.vaults = null
     })
 
     return {
