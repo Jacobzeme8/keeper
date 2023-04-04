@@ -4,7 +4,8 @@
       <div class="col-12 d-flex flex-column align-items-center">
         <img :src="account.coverImg" class="img-fluid cover-img" alt="">
         <div>
-          <img :src="account.picture" class="picture img-fluid rounded-circle" alt="">
+          <img data-bs-target="#account-form" data-bs-toggle="modal" :src="account.picture"
+            class="picture img-fluid rounded-circle selectable" alt="">
         </div>
       </div>
     </div>
@@ -29,6 +30,10 @@
       </section>
     </div>
   </div>
+
+  <ModalComponent id="account-form">
+    <p>edit account modal</p>
+  </ModalComponent>
 </template>
 
 <script>
@@ -38,38 +43,38 @@ import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { vaultsService } from "../services/VaultsService"
 import { keepsService } from "../services/KeepsService"
+import ModalComponent from "../components/ModalComponent.vue"
 export default {
   setup() {
-
-    async function getMyVaults() {
+    async function getMyInfo() {
       try {
-        await vaultsService.getMyVaults()
-      } catch (error) {
-        logger.error(error)
-        Pop.error(error)
+        await vaultsService.getMyVaults();
+        await getMyKeeps();
+      }
+      catch (error) {
+        logger.error(error);
+        Pop.error(error);
       }
     }
-
     async function getMyKeeps() {
       try {
-        await keepsService.getMyKeeps()
-      } catch (error) {
-        logger.error(error)
-        Pop.error(error)
+        await keepsService.getMyKeeps();
+      }
+      catch (error) {
+        logger.error(error);
+        Pop.error(error);
       }
     }
-
     onMounted(() => {
-      getMyVaults()
-      getMyKeeps()
-    })
-
+      getMyInfo();
+    });
     return {
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
       keeps: computed(() => AppState.keeps)
-    }
-  }
+    };
+  },
+  components: { ModalComponent }
 }
 </script>
 

@@ -31,6 +31,20 @@ class KeepsService{
     AppState.keeps = res.data
   }
 
+  async createKeep(keepData, route){
+    const res = await api.post('api/keeps', keepData)
+    logger.log(res.data)
+    if(!route.path.includes('profile')){
+      AppState.keeps.push(res.data)
+    }
+  }
+
+  async deleteKeep(keepId){
+    const res = await api.delete(`api/keeps/${keepId}`)
+    const index = AppState.keeps.findIndex(k => k.id == keepId)
+    AppState.keeps.splice(index, 1)
+  }
+
 }
 
 export const keepsService = new KeepsService();

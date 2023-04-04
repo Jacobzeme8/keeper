@@ -3,10 +3,12 @@
     <div class="row">
       <div class="col-12 p-0 vault-view">
         <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
-          <img :src="vault.img" class="img-fluid rounded vault-img" alt="">
+          <img :title="`Go to ${vault.name} vault page`" :src="vault.img" class="img-fluid rounded vault-img" alt="">
         </router-link>
         <h3 class=" ps-2 shadow text-light vault-name">{{ vault.name }}</h3>
-        <i v-if="vault.isPrivate" class="mdi mdi-lock fs-4 private text-light shadow"></i>
+        <i title="Private Vault" v-if="vault.isPrivate" class="mdi mdi-lock fs-4 private text-light shadow"></i>
+        <i :title="`Delete  ${vault.name} Vault`" @click="deleteVault(vault.id)" v-if="vault.creatorId == account.id"
+          class="mdi mdi-delete fs-4 text-danger delete selectable"></i>
       </div>
     </div>
   </div>
@@ -14,6 +16,12 @@
 
 
 <script>
+import { computed } from 'vue'
+import { AppState } from "../AppState";
+import Pop from "../utils/Pop";
+import { logger } from "../utils/Logger";
+import { vaultsService } from "../services/VaultsService";
+
 export default {
   props: {
     vault: {
@@ -22,13 +30,31 @@ export default {
     }
   },
   setup() {
-    return {}
+    return {
+      account: computed(() => AppState.account),
+      async deleteVault(vaultId) {
+        try {
+          if (await Pop.confirm("delete this vault?")) {
+            await vaultsService.deleteVault(vaultId)
+          }
+        } catch (error) {
+          Pop.error(error)
+          logger.error(error)
+        }
+      }
+    }
   }
 }
 </script>
 
 
 <style lang="scss" scoped>
+.delete {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+}
+
 .vault-img {
   height: 30vh;
   object-fit: cover;

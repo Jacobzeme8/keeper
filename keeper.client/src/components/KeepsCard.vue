@@ -4,6 +4,9 @@
       <img @click="getActiveKeep(keep.id)" data-bs-toggle="modal" data-bs-target="#keepModal"
         class="rounded img-fluid selectable" :src="keep.img" alt="">
       <slot class="top-card"></slot>
+      <i :title="`Delete ${keep.name} Keep`" @click="deleteKeep(keep.id)"
+        v-if="keep.creatorId == account.id && route.path == '/account'"
+        class="mdi mdi-delete fs-4 text-danger delete selectable"></i>
       <div class="profile-info ps-2">
         <h3 class="text-wrap text-light shadow">{{ keep.name }}</h3>
       </div>
@@ -22,9 +25,12 @@
 
 
 <script>
+import { useRoute } from "vue-router";
 import { keepsService } from "../services/KeepsService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
+import { computed } from "@vue/reactivity";
+import { AppState } from "../AppState";
 
 
 
@@ -36,13 +42,26 @@ export default {
     }
   },
   setup() {
+    const route = useRoute()
     return {
+      account: computed(() => AppState.account),
+      route,
       async getActiveKeep(keepId) {
         try {
           await keepsService.getActiveKeep(keepId)
         } catch (error) {
           logger.error(error)
           Pop.error(error)
+        }
+      },
+      async deleteKeep(keepId) {
+        try {
+          if (await Pop.confirm("delete this keep?")) {
+            await keepsService.deleteKeep(keepId)
+          }
+        } catch (error) {
+          Pop.error(error)
+          logger.error(error)
         }
       }
     };
@@ -52,6 +71,12 @@ export default {
 
 
 <style lang="scss" scoped>
+.delete {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+}
+
 .keep-view {
   position: relative;
 }
