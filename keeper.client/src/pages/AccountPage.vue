@@ -32,7 +32,7 @@
   </div>
 
   <ModalComponent id="account-form">
-    <p>edit account modal</p>
+    <AccountForm />
   </ModalComponent>
 </template>
 
