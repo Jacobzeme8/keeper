@@ -4,9 +4,10 @@
       <div class="col-12 d-flex flex-column align-items-center">
         <img :src="account.coverImg" class="img-fluid cover-img" alt="">
         <div>
-          <img data-bs-target="#account-form" data-bs-toggle="modal" :src="account.picture"
+          <img title="edit account" data-bs-target="#account-form" data-bs-toggle="modal" :src="account.picture"
             class="picture img-fluid rounded-circle selectable" alt="">
         </div>
+        <h1>{{ account.name }}</h1>
         <h2 v-if="keeps && vaults">{{ keeps.length }} Keeps / {{ vaults.length }} Vaults</h2>
       </div>
     </div>
@@ -16,7 +17,7 @@
       <div class="col-12">
         <h1>My Vaults</h1>
       </div>
-      <div v-for="vault in vaults" class="col-3 my-2">
+      <div v-for="vault in vaults" class="col-md-3 col-sm-6 my-2">
         <VaultComponent :vault="vault" />
       </div>
     </div>

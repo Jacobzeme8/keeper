@@ -6,6 +6,7 @@
         <div>
           <img :src="profile.picture" class="picture img-fluid rounded-circle" alt="">
         </div>
+        <h1>{{ profile.name }}</h1>
         <h2 v-if="keeps && vaults">{{ keeps.length }} Keeps / {{ vaults.length }} Vaults</h2>
       </div>
     </div>
@@ -15,7 +16,7 @@
       <div class="col-12">
         <h1>{{ profile.name }}'s Vaults</h1>
       </div>
-      <div v-for="vault in vaults" class="col-3 my-2">
+      <div v-for="vault in vaults" class="col-md-3 col-sm-6 my-2">
         <VaultComponent :vault="vault" />
       </div>
     </div>

@@ -40,12 +40,12 @@
           </router-link>
         </div>
         <div class="d-flex align-items-center">
-          <div>
+          <!-- <div class="button-query" v-if="account.id">
             <button data-bs-toggle="modal" data-bs-target="#vault-form" class="btn btn-success form-button me-3">Create
               Vault</button>
             <button data-bs-toggle="modal" data-bs-target="#keep-form" class="btn btn-success form-button me-3">Create
               Keep</button>
-          </div>
+          </div> -->
           <Login />
         </div>
       </div>
@@ -64,9 +64,13 @@
 
 <script>
 import Login from './Login.vue'
+import { computed } from "vue"
+import { AppState } from "../AppState"
 export default {
   setup() {
-    return {}
+    return {
+      account: computed(() => AppState.account)
+    }
   },
   components: { Login }
 }
@@ -94,6 +98,14 @@ a:hover {
 @media screen and (min-width: 768px) {
   nav {
     height: 64px;
+  }
+
+
+}
+
+@media screen and (max-width: 576px) {
+  .button-query {
+    visibility: hidden;
   }
 }
 

@@ -22,10 +22,24 @@
               logout
             </div>
           </div>
+          <div class="button-query d-flex flex-column" v-if="account.id">
+            <button data-bs-toggle="modal" data-bs-target="#vault-form" class="btn btn-success form-button m-1">Create
+              Vault</button>
+            <button data-bs-toggle="modal" data-bs-target="#keep-form" class="btn btn-success form-button m-1">Create
+              Keep</button>
+          </div>
         </div>
       </div>
     </div>
   </span>
+
+  <ModalComponent id="vault-form">
+    <VaultForm />
+  </ModalComponent>
+
+  <ModalComponent id="keep-form">
+    <KeepForm />
+  </ModalComponent>
 </template>
 
 <script>
